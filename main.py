@@ -1,27 +1,28 @@
 import sys
+
 import mysql.connector
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+
 
 class MyGUI(QMainWindow):
 
     def __init__(self):
         super(MyGUI, self).__init__()
-        uic.loadUi("main_site.ui", self) # Pfad vom Design angeben
+        uic.loadUi("main_site.ui", self)  # Pfad vom Design angeben
         self.show()
 
         # Funktionen aufrufen
         self.anlegen.clicked.connect(self.anlegen_clicked)
         self.second_site = None  # Initialisierung von self.second_site WICHTIG!!
-        self.load_all_data(self)
+        self.load_all_data()
 
     def anlegen_clicked(self):
         if self.second_site is None:
             self.second_site = SecondWindow()  # Verwendung von self
         self.second_site.show()
-        self.close() # Damit das Hauptfenster schließt wenn man etwas eingibt
+        self.close()  # Damit das Hauptfenster schließt wenn man etwas eingibt
 
-    @staticmethod
     def load_all_data(self):
         # Connection herstellen
         connection = DatabaseConnector.connect_to_database()
@@ -48,6 +49,7 @@ class DatabaseConnector:
         )
         return connection
 
+
 class SecondWindow(QWidget):
     def __init__(self):
         super(SecondWindow, self).__init__()
@@ -55,18 +57,34 @@ class SecondWindow(QWidget):
         self.show()
 
         # Funktionen
-        self.anlegen.clicked.connect(self.anlegen_clicked)
+        self.speichern.clicked.connect(self.speichern_clicked)
 
+    def speichern_clicked(self):
+        connection = DatabaseConnector.connect_to_database()
+        cursor = connection.cursor()
 
-    def anlegen_clicked(self):
-        DatabaseConnector.connect_to_database()
-        curser
+        # SQL Statement
+        sql = "INSERT INTO nutzerdaten (webseite, url, username, passwort) VALUES (%s, %s, %s, %s)"
+
+        # Werte bekommen aus Eingabe
+        webseite = self.webseite.text()
+        url = self.url.text()
+        username = self.username.text()
+        passwort = self.passwort.text()
+
+        value = (webseite, url, username, passwort)
+        cursor.execute(sql, value)
+
+        connection.commit()
+        connection.close()
+
 
 def main():
     app = QApplication([])
     window = MyGUI()
-    window.setFixedSize(800, 581) # Damit man die Fenstergröße nicht ändern kann
+    window.setFixedSize(800, 581)  # Damit man die Fenstergröße nicht ändern kann
     app.exec_()
+
 
 # Zum Ausführen des Fensters
 if __name__ == '__main__':
