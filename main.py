@@ -22,7 +22,7 @@ class MyGUI(QMainWindow):
     def anlegen_clicked(self):
         if self.second_site is None:
             self.second_site = SecondWindow()  # Verwendung von self
-        self.second_site.setFixedSize(818, 254)
+        self.second_site.setFixedSize(804, 380)
         self.second_site.show()
         self.close()  # Damit das Hauptfenster schließt wenn man etwas eingibt
 
@@ -63,6 +63,7 @@ class SecondWindow(QWidget):
         self.main_site = None  # Initialisierung von self.second_site WICHTIG!!
         self.speichern.clicked.connect(self.speichern_clicked)
         self.abbrechen.clicked.connect(self.abbrechen_clicked)
+        self.text_input.hide() # Zum Verstecken der TextBox
 
 
     def abbrechen_clicked(self):
@@ -92,14 +93,14 @@ class SecondWindow(QWidget):
         value = (webseite, url, username, passwort)
         cursor.execute(sql, value)
 
+        # Text anzeigen
+        text = f"Es wurde {cursor.rowcount} Datensätz angelegt. \nDer Datensatz wurde erfolgreich angelegt!"
+        self.text_input.setText(text)
+        self.text_input.show()
+
         # Abschicken und Speichern
         connection.commit()
         connection.close()
-
-        self.close_site() # Damit man wieder auf die Hauptseite kommt
-
-
-
 
 def main():
     app = QApplication([])

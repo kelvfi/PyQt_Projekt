@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>818</width>
-    <height>254</height>
+    <width>804</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QLineEdit" name="passwort">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>400</x>
      <y>130</y>
      <width>381</width>
      <height>31</height>
@@ -29,8 +29,8 @@
   <widget class="QPushButton" name="speichern">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>190</y>
+     <x>20</x>
+     <y>300</y>
      <width>376</width>
      <height>41</height>
     </rect>
@@ -42,7 +42,8 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">background-color: rgb(1, 99, 141);
+color: rgb(0,0,0);</string>
    </property>
    <property name="text">
     <string>Speichern</string>
@@ -55,7 +56,7 @@
   <widget class="QLineEdit" name="url">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>410</x>
      <y>80</y>
      <width>371</width>
      <height>31</height>
@@ -68,7 +69,7 @@
   <widget class="QLabel" name="titel">
    <property name="geometry">
     <rect>
-     <x>28</x>
+     <x>18</x>
      <y>20</y>
      <width>761</width>
      <height>39</height>
@@ -84,8 +85,8 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(23, 116, 255);
-color: rgb(255, 255, 255);</string>
+    <string notr="true">background-color: rgb(2, 137, 195);
+color: rgb(0, 75, 107);</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::NoFrame</enum>
@@ -100,7 +101,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLineEdit" name="webseite">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>80</y>
      <width>381</width>
      <height>31</height>
@@ -113,8 +114,8 @@ color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="abbrechen">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>190</y>
+     <x>410</x>
+     <y>300</y>
      <width>376</width>
      <height>41</height>
     </rect>
@@ -124,6 +125,10 @@ color: rgb(255, 255, 255);</string>
      <family>Roboto</family>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(1, 99, 141);
+color: rgb(0,0,0);</string>
    </property>
    <property name="text">
     <string>Abbrechen</string>
@@ -136,7 +141,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLineEdit" name="username">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>130</y>
      <width>371</width>
      <height>31</height>
@@ -149,7 +154,36 @@ color: rgb(255, 255, 255);</string>
     <string>Username</string>
    </property>
   </widget>
+  <widget class="QTextBrowser" name="text_input">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>190</y>
+     <width>761</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 57 10pt &quot;Roboto&quot;;
+background-color: rgb(1, 123, 175);</string>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Roboto'; font-size:10pt; font-weight:56; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>webseite</tabstop>
+  <tabstop>url</tabstop>
+  <tabstop>username</tabstop>
+  <tabstop>passwort</tabstop>
+  <tabstop>speichern</tabstop>
+  <tabstop>abbrechen</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

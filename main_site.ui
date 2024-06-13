@@ -38,6 +38,10 @@
          <pointsize>10</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(149, 149, 149);
+color: rgb(80, 80, 80);</string>
+       </property>
        <property name="text">
         <string>Anlegen</string>
        </property>
@@ -54,6 +58,10 @@
          <family>Roboto</family>
          <pointsize>10</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(149, 149, 149);
+color: rgb(80, 80, 80);</string>
        </property>
        <property name="text">
         <string>Abbrechen</string>
@@ -88,8 +96,8 @@
         <bool>false</bool>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 255);</string>
+        <string notr="true">background-color: rgb(167, 167, 167);
+color: rgb(106, 106, 106);</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
@@ -152,11 +160,6 @@ color: rgb(255, 255, 255);</string>
        </row>
        <row>
         <property name="text">
-         <string>9</string>
-        </property>
-       </row>
-       <row>
-        <property name="text">
          <string>10</string>
         </property>
        </row>
@@ -197,6 +200,11 @@ color: rgb(255, 255, 255);</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>anzeige</tabstop>
+  <tabstop>anlegen</tabstop>
+  <tabstop>abbrechen_main</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
