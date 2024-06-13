@@ -48,7 +48,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="abbrechen">
+      <widget class="QPushButton" name="abbrechen_main">
        <property name="font">
         <font>
          <family>Roboto</family>

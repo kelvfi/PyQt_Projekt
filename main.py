@@ -1,5 +1,3 @@
-import sys
-
 import mysql.connector
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -16,10 +14,15 @@ class MyGUI(QMainWindow):
         self.anlegen.clicked.connect(self.anlegen_clicked)
         self.second_site = None  # Initialisierung von self.second_site WICHTIG!!
         self.load_all_data()
+        self.abbrechen_main.clicked.connect(self.abbrechen_main_clicked)
+
+    def abbrechen_main_clicked(self):
+        self.close()
 
     def anlegen_clicked(self):
         if self.second_site is None:
             self.second_site = SecondWindow()  # Verwendung von self
+        self.second_site.setFixedSize(818, 254)
         self.second_site.show()
         self.close()  # Damit das Hauptfenster schließt wenn man etwas eingibt
 
@@ -57,7 +60,20 @@ class SecondWindow(QWidget):
         self.show()
 
         # Funktionen
+        self.main_site = None  # Initialisierung von self.second_site WICHTIG!!
         self.speichern.clicked.connect(self.speichern_clicked)
+        self.abbrechen.clicked.connect(self.abbrechen_clicked)
+
+
+    def abbrechen_clicked(self):
+        self.close_site()
+
+    def close_site(self):
+        if self.main_site is None:
+            self.main_site = MyGUI()  # Verwendung von self
+        self.main_site.setFixedSize(800, 581)
+        self.main_site.show()
+        self.close()  # Damit das SecondWindow schließt
 
     def speichern_clicked(self):
         connection = DatabaseConnector.connect_to_database()
@@ -72,11 +88,17 @@ class SecondWindow(QWidget):
         username = self.username.text()
         passwort = self.passwort.text()
 
+        # Wert vergeben und ausführen
         value = (webseite, url, username, passwort)
         cursor.execute(sql, value)
 
+        # Abschicken und Speichern
         connection.commit()
         connection.close()
+
+        self.close_site() # Damit man wieder auf die Hauptseite kommt
+
+
 
 
 def main():
