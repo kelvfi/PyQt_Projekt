@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>802</width>
-    <height>582</height>
+    <width>797</width>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,9 +68,55 @@ color: rgb(80, 80, 80);</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/exit.svg</normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/exit.svg</iconset>
+         <normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/trash-solid.svg</normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/trash-solid.svg</iconset>
        </property>
       </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="pwd_anzeigen">
+         <property name="font">
+          <font>
+           <family>Roboto</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(149, 149, 149);
+color: rgb(80, 80, 80);</string>
+         </property>
+         <property name="text">
+          <string>Anzeigen</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/eye-solid.svg</normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/eye-solid.svg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="bearbeiten_main">
+         <property name="font">
+          <font>
+           <family>Roboto</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(149, 149, 149);
+color: rgb(80, 80, 80);</string>
+         </property>
+         <property name="text">
+          <string>Bearbeiten</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/pen-solid.svg</normaloff>../../../../Projektarbeit/Mockup/Bilder_Mockup/pen-solid.svg</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
