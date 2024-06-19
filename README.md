@@ -1,5 +1,5 @@
 # PyQt Projekt
-Ich möchte einen Passwort-Manager erstellen, der es in einer Datenbank speichert und auch verschlüsselt dieses Framework ist dazu da
+Ich möchte einen Passwort-Manager erstellen, der es in einer Datenbank speichert und auch verschlüsselt dieses Framework ist dazu da,
 um die GUI für eine Desktop anwendung zu erstellen.
 
 ![Tabelle-Passwort](/doku_img/main_site.png)
@@ -25,6 +25,13 @@ dem folgenden Bild zu sehen!)
 
 Mit dem Abbrechen Button kommt man zurück auf die Hauptseite dieses Programmes, dort kann
 man nachsehen, ob das Anlegen des neuen Datensatzes auch funktioniert hat.
+
+### Hilfsmittel
+Um die Designs zu erstellen, von diesen Fenstern habe ich den **Qt-Designer** verwendet, mit diesem Programm
+ist es möglich ganz einfach die Fenster mittels Drag-and-drop zu Designen was den Projektaufwand stark vermindert.
+
+Hier eine kleine Abbildung wie es in diesem Programm aussieht:
+![Qt-Designer](/doku_img/qt_designer.png)
 
 ### Noch zu Implementieren
 * Passwort Hashing
