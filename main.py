@@ -1,4 +1,4 @@
-import sqlite3
+from db.database_methods import *  # Import von meiner Klasse
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
@@ -14,22 +14,22 @@ class MyGUI(QMainWindow):
         DatabaseConnector.create_table()
 
         # Funktionen aufrufen
-        self.anlegen.clicked.connect(self.anlegen_clicked) # Insert in Datenbank
+        self.anlegen.clicked.connect(self.anlegen_clicked)  # Insert in Datenbank
         self.second_site = None  # Initialisierung von self.second_site WICHTIG!!
-        self.third_site = None # Initialisierung
-        self.load_all_data_mask() # Alle Daten holen
-        self.loeschen_main.clicked.connect(self.delete) # Daten löschen
-        self.bearbeiten_main.clicked.connect(self.update) # Daten updaten
+        self.third_site = None  # Initialisierung
+        self.load_all_data_mask()  # Alle Daten holen
+        self.loeschen_main.clicked.connect(self.delete)  # Daten löschen
+        self.bearbeiten_main.clicked.connect(self.update)  # Daten updaten
         self.pwd_anzeigen.clicked.connect(self.pwd_anzeigen_clicked)
         self.passwort_visible = False
 
     def update(self):
         selected_row = self.anzeige.currentRow()
-        if selected_row == -1: # Wenn keine Zeile angeklickt wurde
+        if selected_row == -1:  # Wenn keine Zeile angeklickt wurde
             QMessageBox.warning(self, 'Fehler', 'Bitte wählen Sie eine Zeile zum aktualisieren aus.')
             return
 
-        # ID des Datensatzes abrufen
+        # ID des Datensatzes abfragen
         record_id = self.anzeige.item(selected_row, 0).text()
 
         # Datenbankverbindung herstellen
@@ -62,7 +62,7 @@ class MyGUI(QMainWindow):
 
     def delete(self):
         selected_row = self.anzeige.currentRow()
-        if selected_row == -1: # Wenn keine Zeile angeklickt wurde
+        if selected_row == -1:  # Wenn keine Zeile angeklickt wurde
             QMessageBox.warning(self, 'Fehler', 'Bitte wählen Sie eine Zeile zum Löschen aus.')
             return
 
@@ -112,9 +112,9 @@ class MyGUI(QMainWindow):
 
         for row_index, row_data in enumerate(rows):
             for col_index, col_data in enumerate(row_data):
-                if (col_index == 4):
+                if col_index == 4:
                     self.real_passwort.append(col_data)
-                    col_data = "******" # Maskieren
+                    col_data = "******"  # Maskieren
                 self.anzeige.setItem(row_index, col_index, QTableWidgetItem(str(col_data)))
 
         connection.close()
@@ -142,29 +142,6 @@ class MyGUI(QMainWindow):
         connection.close()
 
 
-class DatabaseConnector:
-    @staticmethod
-    def connect_to_database():
-        connection = sqlite3.connect('pyqt.db')
-        return connection
-
-    @staticmethod
-    def create_table():
-        connection = DatabaseConnector.connect_to_database()
-        cursor = connection.cursor()
-        cursor.execute('''
-                CREATE TABLE IF NOT EXISTS nutzerdaten (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    webseite TEXT NOT NULL,
-                    url TEXT NOT NULL,
-                    username TEXT NOT NULL,
-                    passwort TEXT NOT NULL
-                )
-            ''')
-        connection.commit()
-        connection.close()
-
-
 class SecondWindow(QWidget):
     def __init__(self):
         super(SecondWindow, self).__init__()
@@ -175,8 +152,7 @@ class SecondWindow(QWidget):
         self.main_site = None  # Initialisierung von self.second_site WICHTIG!!
         self.speichern.clicked.connect(self.speichern_clicked)
         self.abbrechen.clicked.connect(self.abbrechen_clicked)
-        self.text_input.hide() # Zum Verstecken der TextBox
-
+        self.text_input.hide()  # Zum Verstecken der TextBox
 
     def abbrechen_clicked(self):
         self.close_site()
@@ -214,11 +190,12 @@ class SecondWindow(QWidget):
         connection.commit()
         connection.close()
 
-        # Text aus Inputfeldern wieder löschen
+        # Text aus Input-feldern wieder löschen
         self.webseite.clear()
         self.url.clear()
         self.username.clear()
         self.passwort.clear()
+
 
 class ThirdWindow(QWidget):
     def __init__(self):
@@ -257,7 +234,7 @@ class ThirdWindow(QWidget):
         connection.commit()
         connection.close()
 
-        # Text aus Inputfeldern wieder löschen
+        # Text aus Input-feldern wieder löschen
         self.webseite.clear()
         self.url.clear()
         self.username.clear()
@@ -279,7 +256,6 @@ class ThirdWindow(QWidget):
         self.main_site.setFixedSize(800, 581)
         self.main_site.show()
         self.close()  # Damit das ThirdWindow schließt
-
 
 
 def main():
