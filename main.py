@@ -14,17 +14,47 @@ class MyGUI(QMainWindow):
         self.anlegen.clicked.connect(self.anlegen_clicked)
         self.second_site = None  # Initialisierung von self.second_site WICHTIG!!
         self.load_all_data()
-        self.abbrechen_main.clicked.connect(self.abbrechen_main_clicked)
+        self.loeschen_main.clicked.connect(self.delete)
 
-    def abbrechen_main_clicked(self):
-        self.close()
+    def delete(self):
+        selected_row = self.anzeige.currentRow()
+        if selected_row == -1: # Wenn keine Zeile angeclickt wurde
+            QMessageBox.warning(self, 'Fehler', 'Bitte wählen Sie eine Zeile zum Löschen aus.')
+            return
+
+        # Message Box zum Versichern
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Question)
+        msg_box.setWindowTitle('Bestätigung')
+        msg_box.setText('Möchten Sie diesen Datensatz wirklich löschen?')
+        msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msg_box.button(QMessageBox.Yes).setText('Ja')
+        msg_box.button(QMessageBox.No).setText('Nein')
+        reply = msg_box.exec()
+
+        if reply == QMessageBox.Yes:
+            # ID des zu löschenden Datensatzes abrufen
+            record_id = self.anzeige.item(selected_row, 0).text()
+
+            # Löschen aus der Datenbank
+            connection = DatabaseConnector.connect_to_database()
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM nutzerdaten WHERE id = %s", (record_id,))
+            connection.commit()
+            connection.close()
+
+            # Zeile aus der Tabelle entfernen
+            self.anzeige.removeRow(selected_row)
+            QMessageBox.information(self, 'Erfolg', 'Datensatz wurde gelöscht.')
+        else:
+            print("Löschung abgebrochen")
 
     def anlegen_clicked(self):
         if self.second_site is None:
             self.second_site = SecondWindow()  # Verwendung von self
         self.second_site.setFixedSize(804, 380)
         self.second_site.show()
-        self.close()  # Damit das Hauptfenster schließt wenn man etwas eingibt
+        self.close()  # Damit das Hauptfenster schließt, wenn man etwas eingibt
 
     def load_all_data(self):
         # Connection herstellen

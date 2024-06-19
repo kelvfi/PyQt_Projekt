@@ -52,7 +52,7 @@ color: rgb(80, 80, 80);</string>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="abbrechen_main">
+      <widget class="QPushButton" name="loeschen_main">
        <property name="font">
         <font>
          <family>Roboto</family>
@@ -64,7 +64,7 @@ color: rgb(80, 80, 80);</string>
 color: rgb(80, 80, 80);</string>
        </property>
        <property name="text">
-        <string>Abbrechen</string>
+        <string>Löschen</string>
        </property>
        <property name="icon">
         <iconset>
@@ -203,7 +203,7 @@ color: rgb(106, 106, 106);</string>
  <tabstops>
   <tabstop>anzeige</tabstop>
   <tabstop>anlegen</tabstop>
-  <tabstop>abbrechen_main</tabstop>
+  <tabstop>loeschen_main</tabstop>
  </tabstops>
  <resources/>
  <connections/>
