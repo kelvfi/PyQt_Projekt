@@ -26,13 +26,27 @@ class MyGUI(QMainWindow):
             QMessageBox.warning(self, 'Fehler', 'Bitte wählen Sie eine Zeile zum aktualisieren aus.')
             return
 
+        # ID des Datensatzes abrufen
+        record_id = self.anzeige.item(selected_row, 0).text()
+
+        # Datenbankverbindung herstellen
+        connection = DatabaseConnector.connect_to_database()
+        cursor = connection.cursor()
+
+        # Passwort aus der Datenbank abrufen
+        cursor.execute("SELECT passwort FROM nutzerdaten WHERE id = %s", (record_id,))
+        passwort = cursor.fetchone()[0]
+
+        # Verbindung schließen
+        connection.close()
+
         # Daten speichern zum Übergeben
         data = {
             "id": self.anzeige.item(selected_row, 0).text(),
             "webseite": self.anzeige.item(selected_row, 1).text(),
             "url": self.anzeige.item(selected_row, 2).text(),
             "username": self.anzeige.item(selected_row, 3).text(),
-            "passwort": self.anzeige.item(selected_row, 4).text()
+            "passwort": passwort
         }
 
         # Update Fenster aufrufen
