@@ -102,6 +102,12 @@ class SecondWindow(QWidget):
         connection.commit()
         connection.close()
 
+        # Text aus Inputfeldern wieder löschen
+        self.webseite.clear()
+        self.url.clear()
+        self.username.clear()
+        self.passwort.clear()
+
 def main():
     app = QApplication([])
     window = MyGUI()
