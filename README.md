@@ -26,6 +26,9 @@ dem folgenden Bild zu sehen!)
 Mit dem Abbrechen Button kommt man zurück auf die Hauptseite dieses Programmes, dort kann
 man nachsehen, ob das Anlegen des neuen Datensatzes auch funktioniert hat.
 
+### Noch zu Implementieren
+* Passwort Hashing
+* CRUD Methoden
 
 
 ### Tutorials
