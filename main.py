@@ -14,14 +14,16 @@ class MyGUI(QMainWindow):
         self.anlegen.clicked.connect(self.anlegen_clicked) # Insert in Datenbank
         self.second_site = None  # Initialisierung von self.second_site WICHTIG!!
         self.third_site = None # Initialisierung
-        self.load_all_data() # Alle Daten holen
+        self.load_all_data_mask() # Alle Daten holen
         self.loeschen_main.clicked.connect(self.delete) # Daten löschen
         self.bearbeiten_main.clicked.connect(self.update) # Daten updaten
+        self.pwd_anzeigen.clicked.connect(self.pwd_anzeigen_clicked)
+        self.passwort_visible = False
 
     def update(self):
         selected_row = self.anzeige.currentRow()
         if selected_row == -1: # Wenn keine Zeile angeklickt wurde
-            QMessageBox.warning(self, 'Fehler', 'Bitte wählen Sie eine Zeile zum Löschen aus.')
+            QMessageBox.warning(self, 'Fehler', 'Bitte wählen Sie eine Zeile zum aktualisieren aus.')
             return
 
         # Daten speichern zum Übergeben
@@ -80,6 +82,33 @@ class MyGUI(QMainWindow):
         self.second_site.setFixedSize(804, 380)
         self.second_site.show()
         self.close()  # Damit das Hauptfenster schließt, wenn man etwas eingibt
+
+    def load_all_data_mask(self):
+        # Connection herstellen
+        connection = DatabaseConnector.connect_to_database()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM nutzerdaten")
+        rows = cursor.fetchall()
+
+        self.anzeige.setRowCount(len(rows))
+        self.real_passwort = []
+
+        for row_index, row_data in enumerate(rows):
+            for col_index, col_data in enumerate(row_data):
+                if col_index == 4:
+                    self.real_passwort.append(col_data)
+                    col_data = "******" # Maskieren
+                self.anzeige.setItem(row_index, col_index, QTableWidgetItem(str(col_data)))
+
+        connection.close()
+
+    def pwd_anzeigen_clicked(self):
+        if self.passwort_visible:
+            self.passwort_visible = False
+            self.load_all_data_mask()
+        else:
+            self.passwort_visible = True
+            self.load_all_data()
 
     def load_all_data(self):
         # Connection herstellen

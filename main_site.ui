@@ -75,7 +75,7 @@ color: rgb(80, 80, 80);</string>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="anlegen_2">
+        <widget class="QPushButton" name="pwd_anzeigen">
          <property name="font">
           <font>
            <family>Roboto</family>
