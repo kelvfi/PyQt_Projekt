@@ -1,4 +1,4 @@
-import mysql.connector
+import sqlite3
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
@@ -9,6 +9,9 @@ class MyGUI(QMainWindow):
         super(MyGUI, self).__init__()
         uic.loadUi("main_site.ui", self)  # Pfad vom Design angeben
         self.show()
+
+        # Tabelle erstellen
+        DatabaseConnector.create_table()
 
         # Funktionen aufrufen
         self.anlegen.clicked.connect(self.anlegen_clicked) # Insert in Datenbank
@@ -34,7 +37,7 @@ class MyGUI(QMainWindow):
         cursor = connection.cursor()
 
         # Passwort aus der Datenbank abrufen
-        cursor.execute("SELECT passwort FROM nutzerdaten WHERE id = %s", (record_id,))
+        cursor.execute("SELECT passwort FROM nutzerdaten WHERE id = ?", (record_id,))
         passwort = cursor.fetchone()[0]
 
         # Verbindung schließen
@@ -80,7 +83,7 @@ class MyGUI(QMainWindow):
             # Löschen aus der Datenbank
             connection = DatabaseConnector.connect_to_database()
             cursor = connection.cursor()
-            cursor.execute("DELETE FROM nutzerdaten WHERE id = %s", (record_id,))
+            cursor.execute("DELETE FROM nutzerdaten WHERE id = ?", (record_id,))
             connection.commit()
             connection.close()
 
@@ -109,7 +112,7 @@ class MyGUI(QMainWindow):
 
         for row_index, row_data in enumerate(rows):
             for col_index, col_data in enumerate(row_data):
-                if col_index == 4:
+                if (col_index == 4):
                     self.real_passwort.append(col_data)
                     col_data = "******" # Maskieren
                 self.anzeige.setItem(row_index, col_index, QTableWidgetItem(str(col_data)))
@@ -142,13 +145,24 @@ class MyGUI(QMainWindow):
 class DatabaseConnector:
     @staticmethod
     def connect_to_database():
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="123",
-            database="pyqt"
-        )
+        connection = sqlite3.connect('pyqt.db')
         return connection
+
+    @staticmethod
+    def create_table():
+        connection = DatabaseConnector.connect_to_database()
+        cursor = connection.cursor()
+        cursor.execute('''
+                CREATE TABLE IF NOT EXISTS nutzerdaten (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    webseite TEXT NOT NULL,
+                    url TEXT NOT NULL,
+                    username TEXT NOT NULL,
+                    passwort TEXT NOT NULL
+                )
+            ''')
+        connection.commit()
+        connection.close()
 
 
 class SecondWindow(QWidget):
@@ -179,7 +193,7 @@ class SecondWindow(QWidget):
         cursor = connection.cursor()
 
         # SQL Statement
-        sql = "INSERT INTO nutzerdaten (webseite, url, username, passwort) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO nutzerdaten (webseite, url, username, passwort) VALUES (?, ?, ?, ?)"
 
         # Werte bekommen aus Eingabe
         webseite = self.webseite.text()
@@ -221,7 +235,7 @@ class ThirdWindow(QWidget):
         connection = DatabaseConnector.connect_to_database()
         cursor = connection.cursor()
 
-        sql = "UPDATE nutzerdaten SET webseite = %s, url = %s, username = %s, passwort = %s WHERE id = %s"
+        sql = "UPDATE nutzerdaten SET webseite = ?, url = ?, username = ?, passwort = ? WHERE id = ?"
 
         # Werte bekommen aus Eingabe
         id = self.id.text()
