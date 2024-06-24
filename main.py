@@ -1,3 +1,6 @@
+import os
+import random
+import string
 from db.database_methods import *  # Import von meiner Klasse
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -7,7 +10,8 @@ class MyGUI(QMainWindow):
 
     def __init__(self):
         super(MyGUI, self).__init__()
-        uic.loadUi("main_site.ui", self)  # Pfad vom Design angeben
+        ui_file = os.path.join(os.path.dirname(__file__), 'main_site.ui')   # Pfad vom Design angeben
+        uic.loadUi(ui_file, self)
         self.show()
 
         # Tabelle erstellen
@@ -128,6 +132,7 @@ class MyGUI(QMainWindow):
             self.load_all_data()
 
     def load_all_data(self):
+
         # Connection herstellen
         connection = DatabaseConnector.connect_to_database()
         cursor = connection.cursor()
@@ -152,10 +157,20 @@ class SecondWindow(QWidget):
         self.main_site = None  # Initialisierung von self.second_site WICHTIG!!
         self.speichern.clicked.connect(self.speichern_clicked)
         self.abbrechen.clicked.connect(self.abbrechen_clicked)
+        self.generate_passwort.clicked.connect(self.generate_password)
         self.text_input.hide()  # Zum Verstecken der TextBox
+
 
     def abbrechen_clicked(self):
         self.close_site()
+
+    def generate_password(self):
+        length = 12
+        characters = string.ascii_letters + string.digits + string.punctuation
+        password = ''.join(random.choice(characters) for i in range(length))
+        print("Passwort", password)
+
+        self.passwort.setText(password)
 
     def close_site(self):
         if self.main_site is None:
@@ -165,6 +180,7 @@ class SecondWindow(QWidget):
         self.close()  # Damit das SecondWindow schließt
 
     def speichern_clicked(self):
+        # In Datenbank speichern
         connection = DatabaseConnector.connect_to_database()
         cursor = connection.cursor()
 

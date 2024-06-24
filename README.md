@@ -30,6 +30,9 @@ man nachsehen, ob das Anlegen des neuen Datensatzes auch funktioniert hat.
 Um die Designs zu erstellen, von diesen Fenstern habe ich den **Qt-Designer** verwendet, mit diesem Programm
 ist es möglich ganz einfach die Fenster mittels Drag-and-drop zu Designen was den Projektaufwand stark vermindert.
 
+Um eine `.exe` zu erstellen muss man diesen Command eingeben: `python -O -m PyInstaller main.py --onefile --window
+`
+
 Hier eine kleine Abbildung wie es in diesem Programm aussieht:
 ![Qt-Designer](/doku_img/qt_designer.png)
 
