@@ -1,7 +1,7 @@
 # PyQt Projekt
 Ich möchte einen Passwort-Manager erstellen, der es in einer Datenbank speichert und auch verschlüsselt dieses Framework ist dazu da,
 um die GUI für eine Desktop anwendung zu erstellen.
-
+## Version 1
 ![Tabelle-Passwort](/doku_img/main_site.png)
 
 Hier sieht man die Startseite dieses Projektes, es ist eine einfache Tabelle, die auf
@@ -26,6 +26,34 @@ dem folgenden Bild zu sehen!)
 Mit dem Abbrechen Button kommt man zurück auf die Hauptseite dieses Programmes, dort kann
 man nachsehen, ob das Anlegen des neuen Datensatzes auch funktioniert hat.
 
+## Version 2
+Hier wurde nochmals die neuere version beschrieben und die neuen Funktionen die ich eingebaut habe.
+![main2](/doku_img/main_2.png)
+Wie man hier auf diesem Bild sieht habe ich einige neue Buttons und Funktionen eingebaut.
+
+Hier eine Kurze beschreibung zu den Neuen Funktionen:
+* **Löschen** = Man muss einen Datensatz anklicken und dann Löschen
+* **Anzeigen** = Man kann sich die Passwörter anzeigen lassen
+* **Bearbeiten** = Man muss auf einen Datensatz anklicken und dann kann man ihn bearbeiten
+
+![main_anzeige](/doku_img/main_2_anzeige.png)
+Hier kann man jetzt ganz gut die Anzeige sehen, die Passwörter werden ganz einfach unmaskiert und angezeigt.
+
+### Delete und Bearbeiten
+![main_fehler](/doku_img/main_fehler.png)
+Wenn man auf Bearbeiten oder Löschen klickt, kommt so ein fehler das man keinen Datensatz ausgewählt hat.
+
+![main_delete1](/doku_img/delete_main.png)
+Hat man nun doch einen Datensatz angeklickt dann funktioniert diese Funktion ganz einfach.
+
+![main_delete2](/doku_img/delete_main2.png)
+<br>Hier zeigt es nochmals an das der Datensatz erfolgreich gelöscht wurde.
+
+### Anlegen änderungen
+![second_site2](/doku_img/second_site2.png)
+Bei dieser Abbildung sieht man einen kleinen Button rechts neben dem Passwort, dieser ist dazu da
+um ein Passwort generieren zu lassen.
+
 ### Hilfsmittel
 Um die Designs zu erstellen, von diesen Fenstern habe ich den **Qt-Designer** verwendet, mit diesem Programm
 ist es möglich ganz einfach die Fenster mittels Drag-and-drop zu Designen was den Projektaufwand stark vermindert.
@@ -35,10 +63,6 @@ Um eine `.exe` zu erstellen muss man diesen Command eingeben: `python -O -m PyIn
 
 Hier eine kleine Abbildung wie es in diesem Programm aussieht:
 ![Qt-Designer](/doku_img/qt_designer.png)
-
-### Noch zu Implementieren
-* Passwort Hashing
-* CRUD Methoden
 
 
 ### Tutorials
